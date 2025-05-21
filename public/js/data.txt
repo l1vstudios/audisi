@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "Quote": "AUD#1",
+      "Product": "Jocelyn",
+      "Business": "Menyanyi",
+      "Policy": "Remaja",
+      "Premium": "Jocelyn Osuka",
+      "Status": "Wanita",
+      "Updated": "25/04/2020"
+    }
+    
+  ]
+}
