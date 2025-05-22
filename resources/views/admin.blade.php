@@ -1105,41 +1105,47 @@ $(document).ready(function() {
             }
             
             $('#details').html(`
-                <table class="table table-bordered">
-                    <tr>
-                        <td><strong>Nama Lengkap:</strong></td>
-                        <td>${data.nama_lengkap || 'N/A'}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kategori Audisi:</strong></td>
-                        <td>${data.kategori_audisi || 'N/A'}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kategori Peserta:</strong></td>
-                        <td>${data.kategori_peserta || 'N/A'}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Jenis Kelamin:</strong></td>
-                        <td>${data.jenis_kelamin || 'N/A'}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Alamat Peserta:</strong></td>
-                        <td>${data.alamat || 'N/A'}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Status Peserta:</strong></td>
-                        <td><span id="statusPeserta" class="badge ${getStatusBadgeClass(data.status)}">${data.status || 'N/A'}</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Nomor WA Peserta:</strong></td>
-                        <td>${data.no_wa || 'N/A'}</td>
-                    </tr>
-                </table>
-                <div class="button-container">
-                    <button id="eliminasiBtn" class="btn btn-danger" data-id="${pesertaId}">Eliminasi</button>
-                    <button id="loloskanBtn" class="btn btn-success" data-id="${pesertaId}">Loloskan</button>
-                </div>
+              <table class="table table-bordered" style="font-size: 0.9em;">
+                <tr>
+                  <td style="padding: 4px 8px;"><strong>Nama Lengkap:</strong></td>
+                  <td style="padding: 4px 8px;">${data.nama_lengkap || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 4px 8px;"><strong>Kategori Audisi:</strong></td>
+                  <td style="padding: 4px 8px;">${data.kategori_audisi || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 4px 8px;"><strong>Kategori Peserta:</strong></td>
+                  <td style="padding: 4px 8px;">${data.kategori_peserta || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 4px 8px;"><strong>Jenis Kelamin:</strong></td>
+                  <td style="padding: 4px 8px;">${data.jenis_kelamin || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 4px 8px;"><strong>Alamat Peserta:</strong></td>
+                  <td style="padding: 4px 8px;">${data.alamat || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 4px 8px;"><strong>Status Peserta:</strong></td>
+                  <td style="padding: 4px 8px;">
+                    <span id="statusPeserta" class="badge ${getStatusBadgeClass(data.status)}">
+                      ${data.status || 'N/A'}
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 4px 8px;"><strong>Nomor WA Peserta:</strong></td>
+                  <td style="padding: 4px 8px;">${data.no_wa || 'N/A'}</td>
+                </tr>
+              </table>
+              <div class="button-container">
+                <button id="eliminasiBtn" class="btn btn-danger" data-id="${pesertaId}">Eliminasi</button>
+                <button id="loloskanBtn" class="btn btn-success" data-id="${pesertaId}">Loloskan</button>
+              </div>
             `);
+
+
 
             $('#eliminasiBtn').on('click', function() {
                 updateStatus($(this).data('id'), 'eliminasi');
