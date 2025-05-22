@@ -419,9 +419,13 @@
       </div>
 
       <div class="form-group">
-        <label for="link_vidio" class="required">LINK Video Kontes</label>
+        <label for="link_vidio" class="required">Link Video Kontes (Diupload Youtube)</label>
+        <p style="font-size: 0.9em; color: #555; margin-bottom: 5px;">
+          *Link video <strong>wajib</strong> berupa link dari <strong>YouTube</strong>
+        </p>
         <input type="text" id="link_vidio" name="link_vidio" required>
       </div>
+
 
       <div class="form-group">
         <label class="required">JENIS KELAMIN</label>
