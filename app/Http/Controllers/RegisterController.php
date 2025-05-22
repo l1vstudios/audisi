@@ -79,7 +79,7 @@ class RegisterController extends Controller
     
         try {
             $audisi = \App\Models\RegisterModel::create($audisiData);
-            return redirect()->back()->with('success', 'Pendaftaran berhasil! Terima kasih telah mendaftar untuk The Golden Talent Hunt 2025.');
+            return redirect()->back()->with('success', 'Pendaftaran berhasil! Terima kasih telah mendaftar untuk Indonesia Dream Talent.');
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.')->withInput();
