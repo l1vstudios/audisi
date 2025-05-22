@@ -306,7 +306,7 @@
 </head>
 <body>
   
-  <img src="https://i.postimg.cc/XJRc3JW9/logo.png" alt="Logo" class="logo" />
+  <img src="https://assetscinetrons.b-cdn.net/LOGO%20IDT.png" alt="Logo" class="logo" />
   <div class="form-container">
     <div class="form-title-container">
       <h1 class="form-title">FORM REGISTRASI AUDISI THE GOLDEN TALENT HUNT 2025</h1>
