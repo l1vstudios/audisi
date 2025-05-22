@@ -555,7 +555,7 @@
   </div>
   
   <footer>
-    &copy; 2025 <a href="https://cinetron.id">CINETRON</a>. All rights reserved.
+    &copy; 2025 <a href="https://audisi-production.up.railway.app/audisi">Indonesia Dream Talent</a>. All rights reserved.
   </footer>
 
   <script>
