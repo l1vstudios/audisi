@@ -452,10 +452,10 @@
         </div>
       </div>
       
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="agama" class="required">AGAMA</label>
         <input type="text" id="agama" name="agama" required>
-      </div>
+      </div> -->
       
       <div class="form-group">
         <label for="alamat" class="required">ALAMAT</label>
