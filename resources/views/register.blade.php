@@ -332,7 +332,7 @@
       </ul>
     </div>
     
-    <form method="POST" action="{{ route('register.store') }}">
+    <form method="POST" action="{{ route('register.store') }}" enctype="multipart/form-data">
       @csrf
 
       @if(session('success'))
@@ -412,6 +412,15 @@
       </div>
       
       <div class="divider"></div>
+
+
+      <div class="form-group">
+        <label for="foto_diri" class="required">Upload Foto Diri</label>
+        <p style="font-size: 0.9em; color: white; margin-bottom: 5px;">
+          *Unggah 2 foto dalam satu file: <strong>Close Up</strong> dan <strong>Seluruh Badan</strong> (format JPG/PNG, maksimal 2MB)
+        </p>
+        <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png" required>
+      </div>
       
       <div class="form-group">
         <label for="nama" class="required">NAMA LENGKAP</label>
@@ -419,8 +428,8 @@
       </div>
 
       <div class="form-group">
-        <label for="link_vidio" class="required">Link Video Kontes (Diupload Youtube)</label>
-        <p style="font-size: 0.9em; color: #555; margin-bottom: 5px;">
+        <label for="link_vidio" class="required">Link Video Kontes (Diupload Di Youtube)</label>
+        <p style="font-size: 0.9em; color: white; margin-bottom: 5px;">
           *Link video <strong>wajib</strong> berupa link dari <strong>YouTube</strong>
         </p>
         <input type="text" id="link_vidio" name="link_vidio" required>

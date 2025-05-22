@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'provinsi' => $request->provinsi,
             'kategori_audisi' => $request->kategori_audisi,
             'link_vidio' => $request->link_vidio,
+            'photo' => $request->photo,
 
             'kategori_peserta' => $request->kategori_peserta,
             'nama_lengkap' => $request->nama,
