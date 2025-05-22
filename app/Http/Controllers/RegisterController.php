@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
-            'agama' => $request->agama,
+            // 'agama' => $request->agama,
             'alamat' => $request->alamat,
             'no_wa' => $request->telepon,
             'pekerjaan' => $request->pekerjaan,

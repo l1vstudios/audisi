@@ -45,7 +45,7 @@ class RegisterModel extends Model
         'jenis_kelamin',
         'tempat_lahir',
         'tanggal_lahir',
-        'agama',
+        // 'agama',
         'alamat',
         'no_wa',
         'pekerjaan',
