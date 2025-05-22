@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Form Registrasi Audisi The Golden Talent Hunt 2025</title>
+  <title>Form Registrasi Audisi Indonesia Dream Talent</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     * {
@@ -309,7 +309,7 @@
   <img src="https://assetscinetrons.b-cdn.net/LOGO%20IDT.png" alt="Logo" class="logo" />
   <div class="form-container">
     <div class="form-title-container">
-      <h1 class="form-title">FORM REGISTRASI AUDISI THE GOLDEN TALENT HUNT 2025</h1>
+      <h1 class="form-title">FORM REGISTRASI AUDISI INDONESIA DREAM TALENT</h1>
     </div>
     
     <div class="requirements-header" onclick="toggleRequirements()">
@@ -328,7 +328,7 @@
         <li>Melampirkan Surat ijin dari orang tua ataupun Wali</li>
         <li>Peserta wajib mentaati peraturan yang sudah ditetapkan oleh panitia</li>
         <li>Tidak sedang terikat kontrak</li>
-        <li>Wajib Follow Media social dari panitia The Golden Talent Hunt 2025</li>
+        <li>Wajib Follow Media social dari panitia Indonesia Dream Talent</li>
       </ul>
     </div>
     
