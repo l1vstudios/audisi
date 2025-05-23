@@ -26,8 +26,8 @@
     .logo {
       display: block;
       margin: 0 auto 30px auto;
-      max-width: 300px;
-      width: 100%;
+      max-width: 200px;
+      width: 80%;
       height: auto;
     }
 
@@ -417,7 +417,7 @@
       <div class="form-group">
         <label for="foto_diri" class="required">Upload Foto Diri</label>
         <p style="font-size: 0.9em; color: white; margin-bottom: 5px;">
-          *Unggah 2 foto dalam satu file: <strong>Close Up</strong> dan <strong>Seluruh Badan</strong> (format JPG/PNG, maksimal 2MB)
+          *Unggah 1 foto : <strong>Seluruh Badan</strong> (format JPG/PNG, maksimal 2MB)
         </p>
         <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png" required>
       </div>

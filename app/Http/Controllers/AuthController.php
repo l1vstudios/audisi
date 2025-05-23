@@ -50,7 +50,7 @@ class AuthController extends Controller
         // dd($validated);
 
         if (Auth::attempt($validated)) {
-            return redirect('/admin');
+            return redirect('/admin/dashboard');
         } else {
             return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
         }

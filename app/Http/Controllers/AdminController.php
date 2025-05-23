@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\AdminModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     /**
@@ -52,10 +53,50 @@ class AdminController extends Controller
     }
 
 
+    public function dashboard()
+    {
+
+        $data_audisi = DB::table('tb_audisi')->get();
+
+        return view('dashboard', compact('data_audisi'));
+
+    }
+
+
+
     public function login(Request $request)
     {
         return view('login');
 
+    }
+
+
+    public function regisJuri(Request $request)
+    {
+        return view('regisjuri');
+
+    }
+
+
+    public function registerjuri(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+
+        DB::table('users')->insert([
+            'email' => $validated['email'],
+            'username' => $validated['username'],
+            'name' => $validated['name'],
+            'password' => Hash::make($validated['password']),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('login')->with('success', 'Berhasil register, silakan login.');
     }
 
     /**
@@ -69,6 +110,13 @@ class AdminController extends Controller
         $peserta = DB::table('tb_audisi')->where('id', $id)->first();
         
         if ($peserta) {
+            $provinsi = DB::table('masterdata_provinsi')
+            ->where('kode_provinsi', $peserta->provinsi)
+            ->value('nama_provinsi');
+
+            $kota = DB::table('masterdata_kabkota')
+                ->where('id', $peserta->kota)
+                ->value('nama_kabkota');
             return response()->json([
                 'nama_lengkap' => $peserta->nama_lengkap,
                 'kategori_audisi' => $peserta->kategori_audisi,
@@ -77,11 +125,30 @@ class AdminController extends Controller
                 'alamat' => $peserta->alamat,
                 'status' => $peserta->status,
                 'no_wa' => $peserta->no_wa,
+                'photo' => $peserta->photo,
+
+                
+                'provinsi' => $provinsi,
+                'kota' => $kota,
+                'pekerjaan' => $peserta->pekerjaan,
+                'hobby' => $peserta->hobby,
+                'pengalaman' => $peserta->pengalaman,
+                'nama_ortu' => $peserta->nama_ortu,
+                'pekerjaan_ortu' => $peserta->pekerjaan_ortu,
+
+
+
+
+
+
+
 
 
 
                 'link_vidio' => $peserta->link_vidio 
             ]);
+
+            // dd($request->all());
         } else {
             return response()->json(['message' => 'Peserta not found'], 404);
         }
@@ -114,14 +181,20 @@ class AdminController extends Controller
         ]);
 
         $updated = DB::table('tb_audisi')
-            ->where('id', $id)
-            ->update(['status' => $request->status]);
+        ->where('id', $id)
+        ->update([
+            'status' => $request->status,
+            'created_by' => Auth::id(),
+            'note' => $request->note,
+        ]);
+    
         
         if ($updated) {
             return response()->json([
                 'success' => true,
                 'message' => 'Status peserta berhasil diperbarui',
                 'status' => $request->status
+                
             ]);
         } else {
             return response()->json([

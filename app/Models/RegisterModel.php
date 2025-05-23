@@ -46,6 +46,9 @@ class RegisterModel extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'photo',
+        'note',
+        'created_by',
+
         // 'agama',
         'alamat',
         'no_wa',
@@ -57,5 +60,6 @@ class RegisterModel extends Model
         'nama_ortu',
         'telepon_ortu',
         'pekerjaan_ortu',
+        'created_by'
     ];
 }

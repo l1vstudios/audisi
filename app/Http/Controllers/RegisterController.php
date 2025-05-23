@@ -50,21 +50,35 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request->all());
-      
+        // Validasi request
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        // Proses upload foto
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoName = time().'.'.$photo->getClientOriginalExtension();
+            $photoPath = $photo->storeAs('uploads/photos', $photoName, 'public');
+        } else {
+            $photoPath = null;
+        }
+    
         $audisiData = [
             'kota' => $request->kota,
             'provinsi' => $request->provinsi,
             'kategori_audisi' => $request->kategori_audisi,
             'link_vidio' => $request->link_vidio,
-            'photo' => $request->photo,
-
+            'photo' => $photoPath,
+            'created_by' => 0,
+            'note' => 'Belum Ada',
             'kategori_peserta' => $request->kategori_peserta,
             'nama_lengkap' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
-            // 'agama' => $request->agama,
             'alamat' => $request->alamat,
             'no_wa' => $request->telepon,
             'pekerjaan' => $request->pekerjaan,
@@ -79,7 +93,7 @@ class RegisterController extends Controller
     
         try {
             $audisi = \App\Models\RegisterModel::create($audisiData);
-            return redirect()->back()->with('success', 'Pendaftaran berhasil! Terima kasih telah mendaftar untuk Indonesia Dream Talent.');
+            return redirect()->back()->with('success', 'Pendaftaran berhasil! Terima kasih telah mendaftar untuk Indonesia Dream Talent. Silahkan Simpan Nomor Registrasi Anda Untuk Melihat Status Lolos / Tidak');
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.')->withInput();
