@@ -36,12 +36,12 @@
     </div>
 </div>
 
-    <div class="table-header">
+    <!-- <div class="table-header">
         <h4 class="table-title">Data Peserta Finalis</h4>
         <div class="search-field">
             <input type="text" placeholder="Cari finalis..." id="tableSearch">
         </div>
-    </div>
+    </div> -->
     <div class="table-responsive">
         <table class="table table-hover">
             <thead class="thead-light">

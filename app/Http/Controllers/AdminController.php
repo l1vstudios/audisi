@@ -56,9 +56,14 @@ class AdminController extends Controller
     public function dashboard()
     {
 
+
+        $total_peserta = DB::table('tb_audisi')->count();
+        $total_finalis = DB::table('tb_audisi')->where('status', 'finalis')->count();
+        $total_eliminasi = DB::table('tb_audisi')->where('status', 'eliminasi')->count();
         $data_audisi = DB::table('tb_audisi')->get();
 
-        return view('dashboard', compact('data_audisi'));
+
+        return view('dashboard', compact('data_audisi','total_peserta','total_finalis','total_eliminasi'));
 
     }
 
@@ -126,6 +131,10 @@ class AdminController extends Controller
                 'status' => $peserta->status,
                 'no_wa' => $peserta->no_wa,
                 'photo' => $peserta->photo,
+                'note' => $peserta->note,
+                'noreg' => $peserta->noreg,
+
+
 
                 
                 'provinsi' => $provinsi,

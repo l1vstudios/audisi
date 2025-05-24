@@ -69,6 +69,31 @@ Route::middleware(['auth'])->group(function () {
                 
                 return view('tables.eliminasi', compact('data'));
             }
+
+
+            if ($page == 'pengumuman') {
+                $data = DB::table('tb_pengumuman')->get();
+                \Log::info("Data eliminasi ditemukan: " . $data->count() . " records");
+                
+                if (!view()->exists('tables.pengumuman')) {
+                    \Log::error("View tables.pengumuman tidak ditemukan");
+                    return response('View pengumuman tidak ditemukan', 404);
+                }
+                
+                return view('tables.pengumuman', compact('data'));
+            }
+
+            if ($page == 'dashboard') {
+                $data_audisi = DB::table('tb_audisi')->get();
+                \Log::info("Data eliminasi ditemukan: " . $data_audisi->count() . " records");
+                
+                if (!view()->exists('dashboard')) {
+                    \Log::error("View dashboard tidak ditemukan");
+                    return response('View dashboard tidak ditemukan', 404);
+                }
+                
+                return view('dashboard', compact('data_audisi'));
+            }
             
             if ($page == 'peserta') {
                 $data = DB::table('tb_audisi')->get();
@@ -112,6 +137,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 });
+Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
 Route::post('/pemenang/store', [PemenangController::class, 'store'])->name('pemenang.store');
 Route::post('/mfh', [RegisterController::class, 'store'])->name('register.store');
 Route::post('/get-cities-by-province', [RegisterController::class, 'getCitiesByProvince']);

@@ -5,12 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Form Registrasi Audisi Indonesia Dream Talent</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Tambahkan CSS Select2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!-- SweetAlert CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      margin-top: 3px;
+    }
+
+    .checkbox-container label {
+      margin-bottom: 0;
+      display: inline;
+      font-weight: normal;
     }
 
     body {
@@ -31,17 +51,43 @@
       height: auto;
     }
 
-    select {
-      background-color: #000;
-      color: white;
-      padding: 10px;
+    /* Gaya untuk Select2 */
+    .select2-container--default .select2-selection--single {
+      background-color: rgba(0, 0, 0, 0.7);
       border: 1px solid #444;
       border-radius: 5px;
-    }
-
-    select option {
-      background-color: #000;
+      height: 42px;
       color: white;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      color: white;
+      line-height: 42px;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+      height: 40px;
+    }
+    
+    .select2-container--default .select2-search--dropdown .select2-search__field {
+      background-color: #333;
+      color: white;
+      border: 1px solid #444;
+    }
+    
+    .select2-container--default .select2-results__option {
+      background-color: #222;
+      color: white;
+    }
+    
+    .select2-container--default .select2-results__option--highlighted {
+      background-color: #ff6b00;
+      color: white;
+    }
+    
+    .select2-dropdown {
+      background-color: #222;
+      border: 1px solid #444;
     }
         
     .form-container {
@@ -158,6 +204,7 @@
     input[type="text"],
     input[type="date"],
     input[type="tel"],
+    input[type="file"],
     textarea,
     select {
       width: 100%;
@@ -332,7 +379,7 @@
       </ul>
     </div>
     
-    <form method="POST" action="{{ route('register.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('register.store') }}" enctype="multipart/form-data" id="registrationForm">
       @csrf
 
       @if(session('success'))
@@ -351,7 +398,7 @@
         <div class="form-col">
           <div class="form-group">
             <label for="provinsi" class="required">Provinsi</label>
-            <select id="provinsi" name="provinsi" required>
+            <select id="provinsi" name="provinsi" required class="select2-provinsi">
               <option value="" disabled selected>Pilih Provinsi</option>
               @foreach($provinces as $province)
                 <option value="{{ $province->kode_provinsi }}">{{ $province->nama_provinsi }}</option>
@@ -363,7 +410,7 @@
         <div class="form-col">
           <div class="form-group">
             <label for="kota" class="required">Kota / Kabupaten</label>
-            <select id="kota" name="kota" required disabled>
+            <select id="kota" name="kota" required disabled class="select2-kota">
               <option value="" disabled selected>Pilih Kota</option>
             </select>
           </div>
@@ -413,18 +460,17 @@
       
       <div class="divider"></div>
 
+      <div class="form-group">
+        <label for="nama" class="required">NAMA LENGKAP</label>
+        <input type="text" id="nama" name="nama" required>
+      </div>
 
       <div class="form-group">
-        <label for="foto_diri" class="required">Upload Foto Diri</label>
+        <label for="photo" class="required">Upload Foto Diri</label>
         <p style="font-size: 0.9em; color: white; margin-bottom: 5px;">
           *Unggah 1 foto : <strong>Seluruh Badan</strong> (format JPG/PNG, maksimal 2MB)
         </p>
         <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="nama" class="required">NAMA LENGKAP</label>
-        <input type="text" id="nama" name="nama" required>
       </div>
 
       <div class="form-group">
@@ -434,7 +480,6 @@
         </p>
         <input type="text" id="link_vidio" name="link_vidio" required>
       </div>
-
 
       <div class="form-group">
         <label class="required">JENIS KELAMIN</label>
@@ -464,11 +509,6 @@
           </div>
         </div>
       </div>
-      
-      <!-- <div class="form-group">
-        <label for="agama" class="required">AGAMA</label>
-        <input type="text" id="agama" name="agama" required>
-      </div> -->
       
       <div class="form-group">
         <label for="alamat" class="required">ALAMAT</label>
@@ -538,7 +578,7 @@
       </div>
       
       <div class="form-group">
-        <div class="checkbox-option">
+        <div class="checkbox-container">
           <input type="checkbox" id="persetujuan" name="persetujuan" required>
           <label for="persetujuan" class="required">Dengan ini saya mendaftarkan diri untuk mengikuti audisi The Golden Talent Hunt 2025, dan bersedia mengikuti peraturan dan ketentuan yang berlaku, serta diijinkan oleh orang Tua / Wali saya</label>
         </div>
@@ -554,11 +594,31 @@
     <a href="https://tiktok.com/@cinetron.id" target="_blank"><i class="bi bi-tiktok"></i></a>
   </div>
   
-  <footer>
-    &copy; 2025 <a href="https://audisi-production.up.railway.app/audisi">Indonesia Dream Talent</a>. All rights reserved.
+  <footer style="color: white; text-decoration: none;">
+    &copy; 2025 <a href="https://audisi-production.up.railway.app/audisi" style="color: white; text-decoration: none;">Indonesia Dream Talent</a>. All rights reserved.
   </footer>
 
+  <!-- Tambahkan jQuery dan Select2 JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- SweetAlert JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <script>
+    // Inisialisasi Select2 untuk provinsi dan kota
+    $(document).ready(function() {
+      $('.select2-provinsi').select2({
+        placeholder: "Pilih Provinsi",
+        allowClear: true
+      });
+      
+      $('.select2-kota').select2({
+        placeholder: "Pilih Kota",
+        allowClear: true,
+        disabled: true
+      });
+    });
+
     function toggleRequirements() {
       const requirementsBox = document.getElementById('requirementsBox');
       const toggleIcon = document.getElementById('toggleIcon');
@@ -571,10 +631,14 @@
         toggleIcon.textContent = '▼';
       }
     }
-    document.getElementById('provinsi').addEventListener('change', function () {
+    
+    // Event handler untuk perubahan provinsi
+    $('#provinsi').on('change', function() {
       var provinsiId = this.value;
-
+      var kotaSelect = $('#kota');
+      
       if (provinsiId) {
+        // Kirim permintaan AJAX untuk mendapatkan kota
         fetch('/get-cities-by-province', {
           method: 'POST',
           headers: {
@@ -585,24 +649,101 @@
         })
         .then(response => response.json())
         .then(data => {
-          var kotaSelect = document.getElementById('kota');
-          kotaSelect.innerHTML = '<option value="" disabled selected>Pilih Kota</option>';
-
+          // Kosongkan dan aktifkan dropdown kota
+          kotaSelect.empty().append('<option value="" disabled selected>Pilih Kota</option>');
+          
           if (data.length > 0) {
+            // Tambahkan opsi kota
             data.forEach(function(city) {
-              var option = document.createElement('option');
-              option.value = city.id;
-              option.textContent = city.nama_kabkota;
-              kotaSelect.appendChild(option);
+              kotaSelect.append(new Option(city.nama_kabkota, city.id));
             });
-            kotaSelect.disabled = false;
+            
+            // Aktifkan dan inisialisasi ulang Select2
+            kotaSelect.prop('disabled', false).trigger('change');
+            $('.select2-kota').select2({
+              placeholder: "Pilih Kota",
+              allowClear: true
+            });
           } else {
-            kotaSelect.disabled = true;
+            kotaSelect.prop('disabled', true).trigger('change');
           }
         })
         .catch(error => console.error('Error:', error));
       } else {
-        document.getElementById('kota').disabled = true;
+        kotaSelect.empty().append('<option value="" disabled selected>Pilih Kota</option>');
+        kotaSelect.prop('disabled', true).trigger('change');
+      }
+    });
+
+    // Validasi file upload
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      const fileInput = document.getElementById('photo');
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+      const maxSize = 2 * 1024 * 1024; // 2MB
+      
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const fileName = file.name;
+        
+        // Validasi ekstensi file
+        if (!allowedExtensions.exec(fileName)) {
+          e.preventDefault();
+          Swal.fire({
+            icon: 'error',
+            title: 'Format File Tidak Valid',
+            text: 'Maaf, hanya file dengan format JPG, JPEG, atau PNG yang diperbolehkan.',
+            confirmButtonColor: '#ff6b00'
+          });
+          fileInput.value = '';
+          return false;
+        }
+        
+        // Validasi ukuran file
+        if (file.size > maxSize) {
+          e.preventDefault();
+          Swal.fire({
+            icon: 'error',
+            title: 'Ukuran File Terlalu Besar',
+            text: 'Ukuran file maksimal 2MB.',
+            confirmButtonColor: '#ff6b00'
+          });
+          fileInput.value = '';
+          return false;
+        }
+      }
+    });
+
+    // Validasi saat memilih file
+    document.getElementById('photo').addEventListener('change', function(e) {
+      const fileInput = e.target;
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+      const maxSize = 2 * 1024 * 1024; // 2MB
+      
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const fileName = file.name;
+        
+        if (!allowedExtensions.exec(fileName)) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Format File Tidak Valid',
+            text: 'Maaf, hanya file dengan format JPG, JPEG, atau PNG yang diperbolehkan.',
+            confirmButtonColor: '#ff6b00'
+          });
+          fileInput.value = '';
+          return false;
+        }
+        
+        if (file.size > maxSize) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ukuran File Terlalu Besar',
+            text: 'Ukuran file maksimal 2MB.',
+            confirmButtonColor: '#ff6b00'
+          });
+          fileInput.value = '';
+          return false;
+        }
       }
     });
   </script>

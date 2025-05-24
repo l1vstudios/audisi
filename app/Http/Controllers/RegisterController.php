@@ -65,9 +65,11 @@ class RegisterController extends Controller
         } else {
             $photoPath = null;
         }
-    
+        $noreg = time() . rand(100, 999);
         $audisiData = [
             'kota' => $request->kota,
+            'noreg' => $noreg,
+
             'provinsi' => $request->provinsi,
             'kategori_audisi' => $request->kategori_audisi,
             'link_vidio' => $request->link_vidio,
@@ -93,7 +95,8 @@ class RegisterController extends Controller
     
         try {
             $audisi = \App\Models\RegisterModel::create($audisiData);
-            return redirect()->back()->with('success', 'Pendaftaran berhasil! Terima kasih telah mendaftar untuk Indonesia Dream Talent. Silahkan Simpan Nomor Registrasi Anda Untuk Melihat Status Lolos / Tidak');
+            return redirect()->back()
+            ->with('success', "Pendaftaran berhasil! Simpan Nomor Registrasi Anda: {$noreg} untuk melihat status.");
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.')->withInput();

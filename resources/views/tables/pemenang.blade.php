@@ -66,7 +66,7 @@
                     <td>{{ $item->status ?? '-' }}</td>
                     <td>{{ $item->no_wa ?? $item->phone ?? $item->no_telepon ?? '-' }}</td>
                     <td>
-                    <button class="btn btn-primary btn-sm expand-btn"
+                    <button class="btn btn-primary btn-sm expand-btn2"
                         data-id="{{ $item->id ?? 0 }}"
                         data-nama="{{ $item->nama_lengkap ?? '' }}"
                         data-no="{{ $item->no_wa ?? '' }}"

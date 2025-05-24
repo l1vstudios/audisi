@@ -48,6 +48,8 @@ class RegisterModel extends Model
         'photo',
         'note',
         'created_by',
+        'noreg',
+
 
         // 'agama',
         'alamat',

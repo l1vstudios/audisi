@@ -68,12 +68,7 @@
                     <button 
                         class="btn btn-outline-danger btn-sm expand-btns"
                         data-id="{{ $item->id ?? 0 }}"
-                        data-nama="{{ $item->nama_lengkap ?? '-' }}"
-                        data-no="{{ $item->no_wa ?? '-' }}"
-                        data-alamat="{{ $item->alamat ?? '-' }}"
-                        data-pengalaman="{{ $item->pengalaman ?? '-' }}"
-                        data-pekerjaan="{{ $item->pekerjaan ?? '-' }}"
-                        data-hobby="{{ $item->hobby ?? '-' }}" 
+                       
                         >
                         <i class="fas fa-eye"></i> Detail
                         </button>
